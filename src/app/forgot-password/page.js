@@ -24,7 +24,7 @@ export default function ForgotPasswordPage() {
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center">
             <Code2 size={16} className="text-white" />
           </div>
-          <span className="font-bold text-xl"><span className="gradient-text">Innov</span><span className="text-white">aite</span></span>
+          <span className="font-bold text-xl"><span className="gradient-text">Innov</span><span className="text-white">erse</span></span>
         </Link>
 
         {!submitted ? (

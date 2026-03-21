@@ -14,7 +14,7 @@ export default function Footer() {
               </div>
               <span className="font-bold text-xl">
                 <span className="gradient-text">Innov</span>
-                <span className="text-white">aite</span>
+                <span className="text-white">erse</span>
               </span>
             </div>
             <p className="text-white/50 text-sm leading-relaxed max-w-xs">
@@ -70,7 +70,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-white/30 text-sm">
-          <p>© 2026 Innovaite. All rights reserved.</p>
+          <p>© 2026 Innoverse. All rights reserved.</p>
           <div className="flex gap-6">
             <Link
               href="/privacy"

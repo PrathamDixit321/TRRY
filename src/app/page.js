@@ -52,26 +52,25 @@ export default function LandingPage() {
         <div className="relative max-w-5xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-violet-500/30 text-sm text-violet-300 mb-8">
             <Zap size={14} className="text-violet-400" />
-            The Devfolio Alternative — Open & Beautiful
+            Powering industries with creator brilliance.
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-tight mb-6">
-            Your Portfolio,{' '}<br />
-            <span className="gradient-text">Built for {ROLES[roleIdx]}s</span>
+            Your Innovation Hub,{' '}<br />
+            <span className="gradient-text">Built for Problem Solvers</span>
           </h1>
 
           <p className="text-white/60 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10">
-            Innovaite is the platform where developers showcase their best work, connect with opportunities,
-            and build in public. Your career starts with a great portfolio.
+            Innoverse connects companies with engineers, creators, and freelancers to solve real-world challenges, join hackathons, and build AI-verified portfolios.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/register" className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 text-white font-semibold text-base hover:opacity-90 transition-all hover:shadow-2xl hover:shadow-violet-500/30 flex items-center gap-2 justify-center">
-              Create Free Profile <ArrowRight size={18} />
+          <div className="flex flex-col items-center justify-center mt-2">
+            <Link href="/problems" className="group mb-3 px-8 py-4 sm:px-10 rounded-2xl bg-gradient-to-r from-violet-600 to-blue-600 text-white font-bold text-lg hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(124,58,237,0.5)] transition-all duration-300 flex items-center gap-2 justify-center">
+              Dive In <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
             </Link>
-            <Link href="/explore" className="px-8 py-3.5 rounded-xl glass border border-white/10 text-white/80 font-semibold text-base hover:border-violet-500/40 hover:text-white transition-all flex items-center gap-2 justify-center">
-              <Github size={18} /> Explore Profiles
-            </Link>
+            <p className="text-white/40 text-sm font-medium">
+              Start solving real-world company problems
+            </p>
           </div>
 
           <p className="mt-8 text-white/30 text-sm">
@@ -180,7 +179,7 @@ export default function LandingPage() {
                 Ready to build your <span className="gradient-text">dream portfolio?</span>
               </h2>
               <p className="text-white/60 mb-8 max-w-lg mx-auto">
-                Join thousands of developers who are already growing their careers with Innovaite.
+                Join thousands of developers who are already growing their careers with Innoverse.
               </p>
               <Link href="/register" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 text-white font-semibold hover:opacity-90 transition-all hover:shadow-2xl hover:shadow-violet-500/30">
                 Get Started for Free <ArrowRight size={18} />

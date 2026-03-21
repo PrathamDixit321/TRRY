@@ -11,14 +11,22 @@ export default function Navbar() {
   const router = useRouter();
 
   useEffect(() => {
-    const stored = localStorage.getItem("innovaite_user");
-    if (stored) setUser(JSON.parse(stored));
-    const companyStored = localStorage.getItem("innovaite_company");
+    const stored = localStorage.getItem("innoverse_user");
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      // Auto-migrate the mock to prevent /profile/undefined
+      if (!parsed.username && parsed.email) {
+        parsed.username = parsed.email.split("@")[0].toLowerCase().replace(/[^a-z0-9]/g, "");
+        localStorage.setItem("innoverse_user", JSON.stringify(parsed));
+      }
+      setUser(parsed);
+    }
+    const companyStored = localStorage.getItem("innoverse_company");
     if (companyStored) setCompany(JSON.parse(companyStored));
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("innovaite_user");
+    localStorage.removeItem("innoverse_user");
     setUser(null);
     router.push("/");
   };
@@ -41,7 +49,7 @@ export default function Navbar() {
             </div>
             <span className="font-bold text-lg">
               <span className="gradient-text">Innov</span>
-              <span className="text-white">aite</span>
+              <span className="text-white">erse</span>
             </span>
           </Link>
 
@@ -63,7 +71,7 @@ export default function Navbar() {
                   {company.name}
                 </Link>
                 <button
-                  onClick={() => { localStorage.removeItem("innovaite_company"); setCompany(null); router.push("/"); }}
+                  onClick={() => { localStorage.removeItem("innoverse_company"); setCompany(null); router.push("/"); }}
                   className="px-4 py-2 rounded-lg glass border border-white/10 text-white/60 hover:text-white text-sm font-medium transition-colors"
                 >
                   Sign Out

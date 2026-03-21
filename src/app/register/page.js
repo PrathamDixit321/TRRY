@@ -75,7 +75,7 @@ export default function RegisterPage() {
           </div>
           <span className="font-bold text-xl">
             <span className="gradient-text">Innov</span>
-            <span className="text-white">aite</span>
+            <span className="text-white">erse</span>
           </span>
         </Link>
 
@@ -109,7 +109,7 @@ export default function RegisterPage() {
           </div>
         </div>
 
-        <p className="relative text-white/20 text-sm">© 2026 Innovaite</p>
+        <p className="relative text-white/20 text-sm">© 2026 Innoverse</p>
       </div>
 
       {/* Right panel — form */}
@@ -120,7 +120,7 @@ export default function RegisterPage() {
             <div className="w-7 h-7 rounded-lg bg-linear-to-br from-violet-500 to-blue-500 flex items-center justify-center">
               <Code2 size={14} className="text-white" />
             </div>
-            <span className="font-bold text-lg gradient-text">Innovaite</span>
+            <span className="font-bold text-lg gradient-text">Innoverse</span>
           </Link>
 
           <div className="mb-8">

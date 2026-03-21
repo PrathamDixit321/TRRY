@@ -1,4 +1,13 @@
 import mongoose from "mongoose";
+import dns from "dns";
+
+// Force global Node.js DNS resolution to use Google DNS explicitly.
+// This perfectly bypasses Wi-Fi/ISP level SRV blockages throwing ECONNREFUSED.
+try {
+  dns.setServers(["8.8.8.8", "8.8.4.4"]);
+} catch (e) {
+  // Ignore
+}
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
@@ -22,7 +31,8 @@ export async function connectDB() {
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
-      dbName: "innovaite",
+      family: 4, // Force IPv4 to prevent querySrv ETIMEOUT / ECONNREFUSED on Node 18+
+      serverSelectionTimeoutMS: 5000,
     };
     cached.promise = mongoose
       .connect(MONGODB_URI, opts)

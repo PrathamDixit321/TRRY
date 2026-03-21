@@ -4,7 +4,7 @@ import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
 import {
   ArrowLeft, Trophy, User, Code2, ExternalLink, Github,
-  Star, Clock, Layers, TrendingUp, Award, ChevronDown, ChevronUp
+  Star, Clock, Layers, TrendingUp, Award, ChevronDown, ChevronUp, Terminal
 } from "lucide-react";
 
 function ScoreBadge({ score }) {
@@ -12,10 +12,10 @@ function ScoreBadge({ score }) {
     score >= 80
       ? "from-emerald-500 to-teal-500 shadow-emerald-500/20"
       : score >= 60
-      ? "from-blue-500 to-cyan-500 shadow-blue-500/20"
-      : score >= 40
-      ? "from-yellow-500 to-orange-500 shadow-yellow-500/20"
-      : "from-rose-500 to-red-500 shadow-rose-500/20";
+        ? "from-blue-500 to-cyan-500 shadow-blue-500/20"
+        : score >= 40
+          ? "from-yellow-500 to-orange-500 shadow-yellow-500/20"
+          : "from-rose-500 to-red-500 shadow-rose-500/20";
 
   const label =
     score >= 80 ? "Excellent" : score >= 60 ? "Good" : score >= 40 ? "Average" : "Needs Work";
@@ -88,12 +88,49 @@ function SolutionCard({ solution, rank }) {
           </div>
 
           {/* AI Feedback */}
-          {solution.aiFeedback && (
-            <div className="flex items-start gap-2 px-3 py-2.5 rounded-xl bg-violet-500/8 border border-violet-500/15 mb-4">
-              <TrendingUp size={13} className="text-violet-400 mt-0.5 flex-shrink-0" />
-              <p className="text-violet-300/80 text-xs leading-relaxed">{solution.aiFeedback}</p>
-            </div>
-          )}
+          {solution.aiFeedback && (() => {
+            try {
+              const aiData = JSON.parse(solution.aiFeedback);
+              return (
+                <div className="rounded-2xl bg-gradient-to-br from-violet-500/10 to-blue-500/10 border border-violet-500/30 p-5 mb-5 shadow-lg shadow-violet-500/5 transition-all">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Star size={18} className="text-violet-400" />
+                    <h4 className="text-white font-bold text-sm tracking-wide">Fine-Tuned AI Evaluation</h4>
+                  </div>
+                  <p className="text-white/80 text-sm leading-relaxed mb-4">{aiData.summary || "Evaluation completed."}</p>
+                  
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+                    {[
+                      { l: "Innovation", v: aiData.innovation, m: 25 },
+                      { l: "Feasibility", v: aiData.feasibility, m: 25 },
+                      { l: "Clarity", v: aiData.clarity, m: 20 },
+                      { l: "Market Fit", v: aiData.marketPotential, m: 30 }
+                    ].map(metric => (
+                      <div key={metric.l} className="bg-black/20 rounded-xl p-3 border border-white/5">
+                        <p className="text-white/40 text-[10px] font-bold uppercase tracking-wider mb-1">{metric.l}</p>
+                        <div className="flex items-end gap-1">
+                          <span className="text-white font-bold text-lg leading-none">{metric.v}</span>
+                          <span className="text-white/30 text-xs font-medium pb-0.5">/{metric.m}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="bg-black/30 rounded-xl p-3 border border-white/5">
+                    <p className="text-white/40 text-[10px] uppercase font-bold tracking-wider mb-1 flex items-center gap-1.5"><Terminal size={10} /> Reasoning Trace</p>
+                    <p className="text-violet-300/70 text-xs leading-relaxed">{aiData.reasoning}</p>
+                  </div>
+                </div>
+              );
+            } catch (e) {
+              return (
+                <div className="flex items-start gap-2 px-3 py-2.5 rounded-xl bg-violet-500/8 border border-violet-500/15 mb-4">
+                  <TrendingUp size={13} className="text-violet-400 mt-0.5 flex-shrink-0" />
+                  <p className="text-violet-300/80 text-xs leading-relaxed">{solution.aiFeedback}</p>
+                </div>
+              );
+            }
+          })()}
 
           <div className="flex flex-wrap gap-4 items-center">
             {/* Tech stack */}
@@ -156,7 +193,7 @@ export default function SolutionsPage() {
   }, [problemId]);
 
   useEffect(() => {
-    const stored = localStorage.getItem("innovaite_company");
+    const stored = localStorage.getItem("innoverse_company");
     if (!stored) { router.replace("/company-login"); return; }
     setCompany(JSON.parse(stored));
 

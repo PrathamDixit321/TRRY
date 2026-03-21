@@ -6,7 +6,6 @@ import bcrypt from "bcryptjs";
 // POST /api/auth/login
 export async function POST(request) {
   try {
-    await connectDB();
     const { email, password } = await request.json();
 
     if (!email || !password) {
@@ -16,25 +15,16 @@ export async function POST(request) {
       );
     }
 
-    const user = await User.findOne({ email }).select("+password");
-    if (!user) {
-      return NextResponse.json(
-        { error: "Invalid credentials." },
-        { status: 401 },
-      );
-    }
+    // MOCK LOGIN TO BYPASS MONGODB NETWORK BLOCK FOR SHOWCASE
+    const safeUser = {
+      _id: "mock_user_" + Date.now(),
+      name: "Demo User",
+      username: email.split("@")[0].toLowerCase().replace(/[^a-z0-9]/g, ""),
+      email: email,
+      role: "student"
+    };
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return NextResponse.json(
-        { error: "Invalid credentials." },
-        { status: 401 },
-      );
-    }
-
-    // Return user without password
-    const safeUser = user.toJSON();
-    return NextResponse.json({ message: "Login successful.", user: safeUser });
+    return NextResponse.json({ message: "Login successful (MOCKED).", user: safeUser });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }

@@ -43,7 +43,7 @@ export default function CompanyAuthPage() {
       }
 
       // Store company session
-      localStorage.setItem("innovaite_company", JSON.stringify(data.company));
+      localStorage.setItem("innoverse_company", JSON.stringify(data.company));
       router.push("/company-dashboard");
     } catch {
       setError("Network error. Please try again.");
@@ -66,7 +66,7 @@ export default function CompanyAuthPage() {
         </div>
         <span className="font-bold text-xl">
           <span className="gradient-text">Innov</span>
-          <span className="text-white">aite</span>
+          <span className="text-white">erse</span>
         </span>
       </Link>
 
@@ -193,7 +193,7 @@ export default function CompanyAuthPage() {
       </div>
 
       <p className="mt-8 text-white/20 text-xs text-center">
-        © {new Date().getFullYear()} Innovaite · Company Partner Portal
+        © {new Date().getFullYear()} Innoverse · Company Partner Portal
       </p>
     </div>
   );

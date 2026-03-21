@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Innovaite — Hackathon Platform",
+  title: "Innoverse — Hackathon Platform",
   description: "Host hackathons, build teams, submit projects, and win together.",
 };
 

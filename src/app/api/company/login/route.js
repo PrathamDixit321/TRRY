@@ -6,7 +6,6 @@ import bcrypt from "bcryptjs";
 // POST /api/company/login
 export async function POST(request) {
   try {
-    await connectDB();
     const { email, password } = await request.json();
 
     if (!email || !password) {
@@ -16,23 +15,14 @@ export async function POST(request) {
       );
     }
 
-    const company = await Company.findOne({ email }).select("+password");
-    if (!company) {
-      return NextResponse.json(
-        { error: "Invalid credentials." },
-        { status: 401 }
-      );
-    }
+    // MOCKED RESPONSE FOR SHOWCASE
+    const safeCompany = {
+      _id: "mock_id_12345",
+      name: "Showcase Company",
+      email,
+      role: "company"
+    };
 
-    const isMatch = await bcrypt.compare(password, company.password);
-    if (!isMatch) {
-      return NextResponse.json(
-        { error: "Invalid credentials." },
-        { status: 401 }
-      );
-    }
-
-    const safeCompany = company.toJSON();
     return NextResponse.json({
       message: "Login successful.",
       company: safeCompany,

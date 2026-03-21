@@ -52,7 +52,7 @@ export default function CompanyDashboard() {
   }, []);
 
   useEffect(() => {
-    const stored = localStorage.getItem("innovaite_company");
+    const stored = localStorage.getItem("innoverse_company");
     if (!stored) {
       router.replace("/company-login");
       return;
@@ -63,7 +63,7 @@ export default function CompanyDashboard() {
   }, [router, fetchProblems]);
 
   const handleLogout = () => {
-    localStorage.removeItem("innovaite_company");
+    localStorage.removeItem("innoverse_company");
     router.push("/");
   };
 
@@ -151,7 +151,7 @@ export default function CompanyDashboard() {
             </div>
             <span className="font-bold text-base">
               <span className="gradient-text">Innov</span>
-              <span className="text-white">aite</span>
+              <span className="text-white">erse</span>
             </span>
           </Link>
           <div className="mt-1 ml-9 text-xs text-white/30 font-medium">Company Portal</div>
@@ -194,7 +194,7 @@ export default function CompanyDashboard() {
           <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center">
             <Code2 size={13} className="text-white" />
           </div>
-          <span className="font-bold text-sm gradient-text">Innovaite</span>
+          <span className="font-bold text-sm gradient-text">Innoverse</span>
         </Link>
         <div className="flex items-center gap-3">
           <button

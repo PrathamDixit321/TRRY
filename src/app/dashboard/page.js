@@ -138,7 +138,7 @@ export default function DashboardPage() {
   const [deleting, setDeleting] = useState(null);
 
   useEffect(() => {
-    const stored = localStorage.getItem("innovaite_user");
+    const stored = localStorage.getItem("innoverse_user");
     if (!stored) {
       router.push("/login");
       return;
@@ -155,7 +155,7 @@ export default function DashboardPage() {
   }, [router]);
 
   const handleLogout = () => {
-    localStorage.removeItem("innovaite_user");
+    localStorage.removeItem("innoverse_user");
     router.push("/");
   };
 
@@ -168,7 +168,7 @@ export default function DashboardPage() {
     const data = await res.json();
     if (res.ok) {
       setUser(data.user);
-      localStorage.setItem("innovaite_user", JSON.stringify(data.user));
+      localStorage.setItem("innoverse_user", JSON.stringify(data.user));
     }
     setDeleting(null);
   };
@@ -196,7 +196,7 @@ export default function DashboardPage() {
           onClose={() => setShowAddProject(false)}
           onAdded={(updated) => {
             setUser(updated);
-            localStorage.setItem("innovaite_user", JSON.stringify(updated));
+            localStorage.setItem("innoverse_user", JSON.stringify(updated));
           }}
         />
       )}
@@ -207,7 +207,7 @@ export default function DashboardPage() {
           <div className="w-7 h-7 rounded-lg bg-linear-to-br from-violet-500 to-blue-500 flex items-center justify-center">
             <Code2 size={14} className="text-white" />
           </div>
-          <span className="font-bold text-base gradient-text">Innovaite</span>
+          <span className="font-bold text-base gradient-text">Innoverse</span>
         </Link>
 
         {/* Avatar */}
@@ -457,7 +457,7 @@ export default function DashboardPage() {
               user={user}
               onUpdate={(updated) => {
                 setUser(updated);
-                localStorage.setItem("innovaite_user", JSON.stringify(updated));
+                localStorage.setItem("innoverse_user", JSON.stringify(updated));
               }}
             />
           )}

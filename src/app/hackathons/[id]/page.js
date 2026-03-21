@@ -133,7 +133,7 @@ export default function HackathonDetailPage() {
   const [joinTarget, setJoinTarget] = useState(null);
 
   useEffect(() => {
-    const stored = localStorage.getItem('innovaite_user');
+    const stored = localStorage.getItem('innoverse_user');
     if (stored) setUser(JSON.parse(stored));
   }, []);
 

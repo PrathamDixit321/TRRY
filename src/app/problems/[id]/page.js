@@ -41,7 +41,7 @@ export default function ProblemDetailPage() {
   }, [problemId]);
 
   useEffect(() => {
-    const stored = localStorage.getItem("innovaite_user");
+    const stored = localStorage.getItem("innoverse_user");
     if (stored) setUser(JSON.parse(stored));
     fetchProblem();
   }, [fetchProblem]);
@@ -116,20 +116,61 @@ export default function ProblemDetailPage() {
     const scoreColor =
       score >= 80 ? "text-emerald-400" : score >= 60 ? "text-blue-400" : score >= 40 ? "text-yellow-400" : "text-rose-400";
 
-    return (
-      <div className="min-h-screen bg-[#0a0a0f] text-white flex flex-col items-center justify-center px-5">
-        <div className="max-w-md w-full glass rounded-2xl p-10 text-center">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center mx-auto mb-6">
-            <CheckCircle size={28} className="text-white" />
-          </div>
-          <h2 className="text-2xl font-bold text-white mb-2">Solution Submitted!</h2>
-          <p className="text-white/40 text-sm mb-8">Our AI has evaluated your submission.</p>
+    let parsedFeedback = null;
+    try {
+      parsedFeedback = JSON.parse(submitted.aiFeedback);
+    } catch(e) {}
 
-          <div className="glass rounded-2xl p-6 mb-6">
-            <p className="text-white/40 text-xs uppercase tracking-wider mb-2">Your AI Score</p>
-            <p className={`text-5xl font-black ${scoreColor} mb-1`}>{score}<span className="text-xl text-white/30">/100</span></p>
-            <p className="text-white/50 text-sm">{submitted.aiFeedback}</p>
+    return (
+      <div className="min-h-screen bg-[#0a0a0f] text-white flex flex-col items-center justify-center px-5 py-10">
+        <div className="max-w-lg w-full glass rounded-3xl p-10 text-center">
+          <div className="w-16 h-16 rounded-3xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-xl shadow-emerald-500/20 flex items-center justify-center mx-auto mb-6">
+            <CheckCircle size={32} className="text-white" strokeWidth={2.5} />
           </div>
+          <h2 className="text-3xl font-black text-white mb-2 tracking-tight">Solution Submitted!</h2>
+          <p className="text-white/50 text-sm mb-8">Our AI has evaluated your submission instantly.</p>
+
+          <div className="glass rounded-3xl p-8 mb-8 relative overflow-hidden border border-white/10 group">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 blur-3xl rounded-full" />
+            <div className="absolute top-0 left-0 w-32 h-32 bg-violet-500/10 blur-3xl rounded-full mix-blend-screen" />
+            <p className="text-white/40 text-[11px] font-bold uppercase tracking-[0.2em] mb-4">Your AI Score</p>
+            <p className={`text-7xl font-black tracking-tighter ${scoreColor} mb-6 drop-shadow-lg`}>{score}<span className="text-3xl font-bold text-white/20">/100</span></p>
+
+            {parsedFeedback ? (
+              <div className="text-left space-y-4 w-full relative z-10 mt-6 pt-6 border-t border-white/10">
+                <div className="p-5 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                  <p className="text-white/40 text-[10px] font-bold uppercase tracking-wider mb-2">AI Summary</p>
+                  <p className="text-white/90 text-sm leading-relaxed font-medium">{parsedFeedback.summary}</p>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                    <p className="text-white/40 text-[10px] uppercase font-bold tracking-wider mb-1.5 flex items-center gap-1"><Layers size={10} />Innovation</p>
+                    <p className="text-emerald-400 font-black text-xl">{parsedFeedback.innovation}<span className="text-white/30 text-xs font-medium ml-1">/ 25</span></p>
+                  </div>
+                  <div className="p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                    <p className="text-white/40 text-[10px] uppercase font-bold tracking-wider mb-1.5 flex items-center gap-1"><CheckCircle size={10} />Feasibility</p>
+                    <p className="text-blue-400 font-black text-xl">{parsedFeedback.feasibility}<span className="text-white/30 text-xs font-medium ml-1">/ 25</span></p>
+                  </div>
+                  <div className="p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                    <p className="text-white/40 text-[10px] uppercase font-bold tracking-wider mb-1.5 flex items-center gap-1"><Target size={10} />Clarity</p>
+                    <p className="text-violet-400 font-black text-xl">{parsedFeedback.clarity}<span className="text-white/30 text-xs font-medium ml-1">/ 20</span></p>
+                  </div>
+                  <div className="p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                    <p className="text-white/40 text-[10px] uppercase font-bold tracking-wider mb-1.5 flex items-center gap-1"><Globe size={10} />Market</p>
+                    <p className="text-rose-400 font-black text-xl">{parsedFeedback.marketPotential}<span className="text-white/30 text-xs font-medium ml-1">/ 30</span></p>
+                  </div>
+                </div>
+                
+                <div className="p-4 pt-5 mt-2 rounded-2xl bg-gradient-to-b from-transparent to-white/5 border border-white/5">
+                  <p className="text-white/30 text-xs leading-relaxed italic text-center font-medium">"{parsedFeedback.reasoning}"</p>
+                </div>
+              </div>
+            ) : (
+              <p className="text-white/50 text-sm mt-4">{submitted.aiFeedback}</p>
+            )}
+          </div>
+
 
           <div className="flex gap-3">
             <Link

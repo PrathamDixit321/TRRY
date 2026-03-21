@@ -31,7 +31,7 @@ export default function LoginPage() {
       }
 
       // Store user in localStorage (replace with session/cookie in production)
-      localStorage.setItem("innovaite_user", JSON.stringify(data.user));
+      localStorage.setItem("innoverse_user", JSON.stringify(data.user));
       router.push(`/dashboard`);
     } catch {
       setError("Network error. Please try again.");
@@ -55,7 +55,7 @@ export default function LoginPage() {
           </div>
           <span className="font-bold text-xl">
             <span className="gradient-text">Innov</span>
-            <span className="text-white">aite</span>
+            <span className="text-white">erse</span>
           </span>
         </Link>
 
@@ -70,7 +70,7 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <p className="relative text-white/20 text-sm">© 2026 Innovaite</p>
+        <p className="relative text-white/20 text-sm">© 2026 Innoverse</p>
       </div>
 
       {/* Right panel — form */}
@@ -80,7 +80,7 @@ export default function LoginPage() {
             <div className="w-7 h-7 rounded-lg bg-linear-to-br from-violet-500 to-blue-500 flex items-center justify-center">
               <Code2 size={14} className="text-white" />
             </div>
-            <span className="font-bold text-lg gradient-text">Innovaite</span>
+            <span className="font-bold text-lg gradient-text">Innoverse</span>
           </Link>
 
           <div className="mb-8">
